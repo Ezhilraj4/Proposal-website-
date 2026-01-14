@@ -21,7 +21,6 @@ const scenes = [
 
 let index = 0;
 const container = document.getElementById("scene-container");
-
 function renderScene() {
   container.innerHTML = "";
   addFloatingStickers();
