@@ -6,7 +6,7 @@
     <title>For My Nithya Sree</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        :root { --p: #8e44ad; --g: #2ecc71; --r: #ff2d55; --gold: #ffd700; --navy: #000080; }
+        :root { --p: #8e44ad; --g: #2ecc71; --r: #ff2d55; --gold: #ffd700; }
         body, html { margin: 0; padding: 0; background: #020205; color: white; overflow: hidden; font-family: 'Poppins', sans-serif; }
         
         .bg-mesh {
@@ -41,11 +41,11 @@
             box-shadow: 0 40px 100px rgba(0,0,0,0.6);
         }
 
-        .emoji-float { font-size: 4.5rem; display: block; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px white); }
+        .emoji-float { font-size: 4.5rem; display: block; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        h2 { color: var(--gold); font-size: 1.6rem; margin-top: 20px; text-shadow: 0 0 10px rgba(255,215,0,0.3); }
-        p { font-size: 1.15rem; line-height: 1.7; opacity: 0.9; margin-top: 15px; font-weight: 300; }
+        h2 { color: var(--gold); font-size: 1.6rem; margin-top: 20px; }
+        p { font-size: 1.2rem; line-height: 1.7; opacity: 0.9; margin-top: 15px; }
 
         .yes-btn {
             background: var(--r); padding: 18px 55px; border: none; border-radius: 50px;
@@ -64,14 +64,14 @@
 <div id="loader">
     <h1 class="animate__animated animate__pulse animate__infinite" style="color:var(--gold)">Nithya Sree ❤️</h1>
     <p style="color: #aaa;">⚓ NCC Naval Wing Story ⚓</p>
-    <button class="start-btn" onclick="begin()">Tap to Read</button>
+    <button class="start-btn" onclick="begin()">Start Our Story</button>
 </div>
 
 <div class="story-container" id="main-story"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
-    const igUser = "YOUR_INSTAGRAM_ID"; // <--- CHANGE THIS
+    const igUser = "YOUR_INSTAGRAM_ID"; // <--- Unga Instagram ID-ah inga podunga
 
     const scenes = [
         { e: "👸", text: "Nithya Sree ❤️" },
@@ -108,7 +108,7 @@
                 <div class="card animate__animated animate__fadeInUp">
                     <span class="emoji-float">💍</span>
                     <h2>Nithya Sree</h2>
-                    <p>Will you walk with me forever?</p>
+                    <p>Will you be mine forever?</p>
                     <button class="yes-btn" onclick="celebrate()">YES! ❤️</button>
                     <button id="noBtn" onmouseover="moveNo()">No</button>
                 </div>`;
@@ -127,12 +127,12 @@
         btn.style.position = 'fixed';
         btn.style.left = Math.random() * 80 + 'vw';
         btn.style.top = Math.random() * 80 + 'vh';
-        btn.innerText = "No Option Illai! 😂";
+        btn.innerText = "Yei! No panna mudiyathu! 😂";
     }
 
     function celebrate() {
         confetti({ particleCount: 400, spread: 100, origin: { y: 0.6 }, colors: ['#8e44ad', '#2ecc71', '#ff2d55'] });
-        navigator.clipboard.writeText("Ezhil Raj ❤️ I am ready for us! 💍");
+        navigator.clipboard.writeText("Ezhil Raj ❤️ I accept! 💍");
         alert("Love message copied! Paste it in Ezhil's DMs ❤️");
         setTimeout(() => { window.location.href = `https://www.instagram.com/direct/t/${igUser}/`; }, 2000);
     }
