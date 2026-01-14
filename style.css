@@ -64,3 +64,47 @@ canvas {
   left: 0;
   pointer-events: none;
 }
+
+/* 3D SCENE EFFECT */
+#scene-container {
+  perspective: 1200px;
+}
+
+.scene-text {
+  background: rgba(255,255,255,0.08);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  animation: morph 6s ease-in-out infinite;
+}
+
+@keyframes morph {
+  0% {
+    transform: rotateY(-10deg) rotateX(5deg) scale(1);
+  }
+  50% {
+    transform: rotateY(10deg) rotateX(-5deg) scale(1.05);
+  }
+  100% {
+    transform: rotateY(-10deg) rotateX(5deg) scale(1);
+  }
+}
+
+/* FLOATING IMAGE CARD */
+.photo {
+  width: 220px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  margin: 20px auto;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotateZ(-1deg); }
+  50% { transform: translateY(-15px) rotateZ(1deg); }
+  100% { transform: translateY(0) rotateZ(-1deg); }
+}
