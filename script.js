@@ -1,101 +1,93 @@
-// ------------------- SCENES DATA -------------------
 const scenes = [
-  { text: "Nithya Sree ❤️", bg: "#fbeef8" },
-  { text: "Idhu oru special story…", bg: "#ffe7f0" },
-  { text: "Intha feeling enakku romba precious 😌", bg: "#f7d9eb" },
-  { text: "NCC Naval Wing ⚓", bg: "#e8d4f0" },
-  { text: "Nee en junior-aa irundhaalum…", bg: "#f9e2f4" },
-  { text: "Feelings-ku rank illa ❤️", bg: "#fceaf6" },
-  { text: "First meeting memory…", bg: "#edccee" },
-  { text: "Un siripu en manasula nikkudhu 💕", bg: "#f9dff3" },
-  { text: "Naa propose panninen honestly…", bg: "#fae4f7" },
-  { text: "Nee time venum nu sonna 🙂", bg: "#fbe7f9" },
-  { text: "Adha naan respect panninen ❤️", bg: "#fadff6" },
-  { text: "Waiting is love ⏳", bg: "#fce8fa" },
-  { text: "No pressure…", bg: "#faeffb" },
-  { text: "No forcing..",bg:"#feaffb" },
-  { text: "Just true feelings 💖", bg: "#f7d9f4" },
-  { text: "Ippo oru simple question…", bg: "#fce8fb" },
-  { text: "En manasula irundhu ❤️", bg: "#fdf0fc" },
-  { text: "Un decision enna?", bg: "#fae9fc" },
-
-  // FINAL DECISION SCENE
-  { decision: true, bg: "#ffeefa" }
+  { text: "Nithya Sree ❤️" },
+  { text: "Idhu oru special story…" },
+  { text: "Intha feeling enakku romba precious 😌" },
+  { text: "NCC Naval Wing ⚓" },
+  { text: "Nee en junior-aa irundhaalum…" },
+  { text: "Feelings-ku rank illa ❤️" },
+  { text: "First meeting memory…" },
+  { text: "Un siripu en manasula nikkudhu 💕" },
+  { text: "Naa propose panninen honestly…" },
+  { text: "Nee time venum nu sonna 🙂" },
+  { text: "Adha naan respect panninen ❤️" },
+  { text: "Waiting is love ⏳" },
+  { text: "No pressure…" },
+  { text: "Just true feelings 💖" },
+  { text: "Ippo oru simple question…" },
+  { text: "En manasula irundhu ❤️" },
+  { text: "Un decision enna?" },
+  { decision: true }
 ];
 
-// ------------------- GLOBAL VARIABLES -------------------
 let index = 0;
 const container = document.getElementById("scene-container");
 
-// ------------------- RENDER SCENE -------------------
 function renderScene() {
   container.innerHTML = "";
-  container.style.background = scenes[index].bg;
-
-  // floating stickers
   addFloatingStickers();
 
-  if (scenes[index].decision) {
+  const current = scenes[index];
+
+  if (current.decision) {
     container.innerHTML += `
       <div class="scene-text">
         <p>What do you say? 💖</p>
-        <button id="yes">Yes ❤️</button>
-        <button id="no">Need more time 🙂</button>
-        <p id="reply"></p>
+        <div class="btn-group">
+            <button id="yes">Yes ❤️</button>
+            <button id="no">Need more time 🙂</button>
+        </div>
+        <p id="reply" style="margin-top:15px; font-size: 16px; font-style: italic;"></p>
       </div>
     `;
 
-    document.getElementById("yes").onclick = () => {
-      window.location.href = "https://ig.me/m/YOUR_BACKUP_INSTAGRAM";
+    document.getElementById("yes").onclick = (e) => {
+      e.stopPropagation(); // Stops scene from advancing
+      window.location.href = "https://ig.me/m/YOUR_INSTA_HERE";
     };
 
-    document.getElementById("no").onclick = () => {
-      document.getElementById("reply").innerText =
-        "Paravalla 🙂 Naa wait panna ready ❤️";
+    document.getElementById("no").onclick = (e) => {
+      e.stopPropagation();
+      document.getElementById("reply").innerText = "Paravalla 🙂 Naa wait panna ready ❤️";
     };
   } else {
     const textDiv = document.createElement("div");
     textDiv.className = "scene-text";
-    typeWriter(textDiv, scenes[index].text);
     container.appendChild(textDiv);
+    typeWriter(textDiv, current.text);
   }
 }
 
-// ------------------- FLOATING STICKERS -------------------
-function addFloatingStickers() {
-  const stickersContainer = document.createElement("div");
-  stickersContainer.className = "stickers";
-  container.appendChild(stickersContainer);
+function typeWriter(el, text) {
+  let i = 0;
+  const interval = setInterval(() => {
+    el.innerHTML = text.slice(0, i) + '<span style="color: #ffb6c1;">|</span>';
+    i++;
+    if (i > text.length) {
+      clearInterval(interval);
+      el.innerHTML = text; // Remove cursor at end
+    }
+  }, 50);
+}
 
-  const emojis = ["🌸","✨","🎀","💫","💐","⭐"];
-  for (let i = 0; i < 8; i++) {
+function addFloatingStickers() {
+  const emojis = ["🌸", "✨", "⚓", "🗼", "🎀", "💫"];
+  for (let i = 0; i < 6; i++) {
     const span = document.createElement("span");
     span.className = "sticker";
     span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-    span.style.top = Math.random() * 85 + "%";
-    span.style.left = Math.random() * 85 + "%";
-    stickersContainer.appendChild(span);
+    span.style.left = Math.random() * 90 + "%";
+    span.style.animationDelay = Math.random() * 5 + "s";
+    span.style.fontSize = (20 + Math.random() * 20) + "px";
+    container.appendChild(span);
   }
 }
 
-// ------------------- TYPEWRITER EFFECT -------------------
-function typeWriter(el, text) {
-  let i = 0;
-  el.innerHTML = "";
-  const interval = setInterval(() => {
-    el.innerHTML += text.charAt(i);
-    i++;
-    if (i >= text.length) clearInterval(interval);
-  }, 40);
-}
-
-// ------------------- TAP TO ADVANCE -------------------
-document.body.addEventListener("click", () => {
-  if (index < scenes.length - 1) {
+// TAP TO ADVANCE - Only if not on the decision scene
+document.body.addEventListener("click", (e) => {
+  if (index < scenes.length - 1 && e.target.tagName !== "BUTTON") {
     index++;
     renderScene();
   }
 });
 
-// INITIAL SHOW
 renderScene();
