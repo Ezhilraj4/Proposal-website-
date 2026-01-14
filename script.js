@@ -1,7 +1,7 @@
 const scenes = [
   { text: "Nithya Sree ❤️", bg: "#120318" },
   { text: "Idhu oru normal website illa…", bg: "#1b0f2f" },
-  { text: "Idhu ennoda unmai feelings 😌", bg: "#240b36" },
+  { text: "Idhu ennoda unmaiuna feelings 😌", bg: "#240b36" },
   { text: "NCC Naval Wing ⚓", bg: "#001f3f" },
   { text: "Nee en junior-aa irundhaalum…", bg: "#0a2540" },
   { text: "Feelings-ku rank illa ❤️", bg: "#1a2a6c" },
@@ -14,7 +14,7 @@ const scenes = [
   { text: "Adhu care ⏳", bg: "#6c5b7b" },
   { text: "No pressure…", bg: "#2c3e50" },
   { text: "No forcing…", bg: "#232526" },
-  { text: "Just unmai feelings 💖", bg: "#414345" },
+  { text: "Just unmaiuna feelings 💖", bg: "#414345" },
   { text: "Ippo indha moment…", bg: "#141e30" },
   { text: "Oru simple question mattum…", bg: "#243b55" },
   { text: "En manasula irundhu ❤️", bg: "#000428" },
