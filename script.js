@@ -42,7 +42,7 @@ function renderScene() {
 
     document.getElementById("yes").onclick = (e) => {
       e.stopPropagation(); // Stops scene from advancing
-      window.location.href = "https://ig.me/m/YOUR_INSTA_HERE";
+      window.location.href = "https://www.instagram.com/silent.poetry_11?igsh=MWx6Mmw4Z25meDRvcg==";
     };
 
     document.getElementById("no").onclick = (e) => {
