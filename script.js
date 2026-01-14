@@ -21,27 +21,28 @@ const scenes = [
 
 let index = 0;
 const container = document.getElementById("scene-container");
+
 function renderScene() {
   container.innerHTML = "";
-  addFloatingStickers();
-
   const current = scenes[index];
 
+  const textDiv = document.createElement("div");
+  textDiv.className = "scene-text";
+
   if (current.decision) {
-    container.innerHTML += `
-      <div class="scene-text">
-        <p>What do you say? 💖</p>
-        <div class="btn-group">
-            <button id="yes">Yes ❤️</button>
-            <button id="no">Need more time 🙂</button>
-        </div>
-        <p id="reply" style="margin-top:15px; font-size: 16px; font-style: italic;"></p>
+    textDiv.innerHTML = `
+      <p>What do you say? 💖</p>
+      <div class="btn-group">
+          <button id="yes">Yes ❤️</button>
+          <button id="no">Need more time 🙂</button>
       </div>
+      <p id="reply" style="margin-top:20px; font-size: 18px; color: #ffb6c1;"></p>
     `;
+    container.appendChild(textDiv);
 
     document.getElementById("yes").onclick = (e) => {
-      e.stopPropagation(); // Stops scene from advancing
-      window.location.href = "https://www.instagram.com/silent.poetry_11?igsh=MWx6Mmw4Z25meDRvcg==";
+      e.stopPropagation();
+      window.location.href = "https://ig.me/m/YOUR_INSTA";
     };
 
     document.getElementById("no").onclick = (e) => {
@@ -49,8 +50,6 @@ function renderScene() {
       document.getElementById("reply").innerText = "Paravalla 🙂 Naa wait panna ready ❤️";
     };
   } else {
-    const textDiv = document.createElement("div");
-    textDiv.className = "scene-text";
     container.appendChild(textDiv);
     typeWriter(textDiv, current.text);
   }
@@ -58,30 +57,16 @@ function renderScene() {
 
 function typeWriter(el, text) {
   let i = 0;
+  el.innerHTML = "";
+  const p = document.createElement("p");
+  el.appendChild(p);
   const interval = setInterval(() => {
-    el.innerHTML = text.slice(0, i) + '<span style="color: #ffb6c1;">|</span>';
+    p.innerText = text.slice(0, i);
     i++;
-    if (i > text.length) {
-      clearInterval(interval);
-      el.innerHTML = text; // Remove cursor at end
-    }
-  }, 50);
+    if (i > text.length) clearInterval(interval);
+  }, 60);
 }
 
-function addFloatingStickers() {
-  const emojis = ["🌸", "✨", "⚓", "🗼", "🎀", "💫"];
-  for (let i = 0; i < 6; i++) {
-    const span = document.createElement("span");
-    span.className = "sticker";
-    span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-    span.style.left = Math.random() * 90 + "%";
-    span.style.animationDelay = Math.random() * 5 + "s";
-    span.style.fontSize = (20 + Math.random() * 20) + "px";
-    container.appendChild(span);
-  }
-}
-
-// TAP TO ADVANCE - Only if not on the decision scene
 document.body.addEventListener("click", (e) => {
   if (index < scenes.length - 1 && e.target.tagName !== "BUTTON") {
     index++;
