@@ -6,8 +6,8 @@ const scenes = [
   { text: "NCC Naval Wing ⚓", bg: "#001f3f" },
   { text: "Nee en junior-aa irundhaalum…", bg: "#0a2540" },
   { text: "Feelings-ku rank illa ❤️", bg: "#1a2a6c" },
-  { text: "First meeting memory…", bg: "#3a1c71", image: "images/memory1.jpg" },
-  { text: "Un siripu en manasula nikkudhu 💕", bg: "#41295a", image: "images/memory2.jpg" },
+  { text: "First meeting memory…", bg: "#3a1c71" },
+  { text: "Un siripu en manasula nikkudhu 💕", bg: "#41295a" },
   { text: "Naa dhairiyamaa propose panninen…", bg: "#1d2671" },
   { text: "Nee time venum nu sonna 🙂", bg: "#283048" },
   { text: "Adha naa respect panninen ❤️", bg: "#16222a" },
@@ -21,7 +21,7 @@ const scenes = [
   { text: "En manasula irundhu ❤️", bg: "#000428" },
   { text: "Un decision enna?", bg: "#004e92" },
 
-  // Decision Scene
+  // FINAL DECISION SCENE
   { decision: true, bg: "#000000" }
 ];
 
@@ -54,23 +54,10 @@ function renderScene() {
         "Paravalla 🙂 Naa wait panna ready ❤️";
     };
   } else {
-    const wrapper = document.createElement("div");
-    wrapper.className = "scene-text";
-
-    // Add image if exists
-    if (scenes[index].image) {
-      const photo = document.createElement("div");
-      photo.className = "photo";
-      photo.style.backgroundImage = `url(${scenes[index].image})`;
-      wrapper.appendChild(photo);
-    }
-
-    // Add typewriter text
-    const text = document.createElement("div");
-    typeWriter(text, scenes[index].text);
-    wrapper.appendChild(text);
-
-    container.appendChild(wrapper);
+    const textDiv = document.createElement("div");
+    textDiv.className = "scene-text";
+    typeWriter(textDiv, scenes[index].text);
+    container.appendChild(textDiv);
   }
 }
 
