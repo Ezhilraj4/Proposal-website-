@@ -79,6 +79,24 @@ document.body.addEventListener("click", () => {
     renderScene();
   }
 });
+// Add stickers container
+const stickersContainer = document.createElement("div");
+stickersContainer.className = "stickers";
+
+// List of emoji stickers
+const emojis = ["💖","✨","🌸","🌟","🎀","💐"];
+for(let i=0; i<8; i++){
+  const span = document.createElement("span");
+  span.className = "sticker";
+  span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  // Random position
+  span.style.top = Math.random()*70 + "%";
+  span.style.left = Math.random()*70 + "%";
+  stickersContainer.appendChild(span);
+}
+
+// Append stickers to container
+container.appendChild(stickersContainer);
 
 // ------------------- HEART PARTICLE ANIMATION -------------------
 const canvas = document.getElementById("effects");
