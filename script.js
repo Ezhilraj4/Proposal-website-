@@ -13,6 +13,7 @@ const scenes = [
   { text: "Adha naan respect panninen ❤️", bg: "#fadff6" },
   { text: "Waiting is love ⏳", bg: "#fce8fa" },
   { text: "No pressure…", bg: "#faeffb" },
+  { text: "No forcing..",bg:"#feaffb" },
   { text: "Just true feelings 💖", bg: "#f7d9f4" },
   { text: "Ippo oru simple question…", bg: "#fce8fb" },
   { text: "En manasula irundhu ❤️", bg: "#fdf0fc" },
