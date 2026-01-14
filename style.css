@@ -1,164 +1,96 @@
-/* -----------------------------------------------------------
-   GENERAL LAYOUT
-   ----------------------------------------------------------- */
+/* GENERAL LAYOUT */
 body, html {
   margin: 0;
   padding: 0;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Prevents unwanted scrolling */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
   background-color: #0a0a23;
 }
 
-/* THE BACKGROUND IMAGE */
 #scene-container {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
-              url('background.jpg') no-repeat center center;
+  /* Using your specific photo */
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+              url('images/1000065728.jpg') no-repeat center center;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* -----------------------------------------------------------
-   PAPER THEMED FRAME (The Letter)
-   ----------------------------------------------------------- */
+/* TEXT ALONE STYLE */
 .scene-text {
   position: absolute;
-  top: 15%; /* Positioned in the "Sky" area */
-  width: 85%;
-  max-width: 420px;
-  min-height: 250px;
-  background: #fffef0; /* Vintage paper color */
-  
-  /* Blue Ruled Lines */
-  background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
-  background-size: 100% 30px; 
-  
-  padding: 45px 25px 30px 50px; /* Space for the red margin */
-  border-radius: 2px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  
-  /* Red Margin Line */
-  border-left: 2px solid #ff8d8d;
-  
+  top: 30%; /* Positioned in the dark sky area */
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
   z-index: 10;
-  animation: paperSlideIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-             floatPaper 4s ease-in-out infinite alternate;
-  
-  /* Ensures text stays within the paper */
-  word-wrap: break-word;
-  box-sizing: border-box;
+  /* Glow effect to make text readable against city lights */
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 182, 193, 0.6);
+  animation: fadeIn 1.5s ease-in;
 }
 
-/* Paper Clip Decorative Element */
-.scene-text::before {
-  content: "📎";
-  position: absolute;
-  top: -15px;
-  left: 20px;
-  font-size: 28px;
-  transform: rotate(-15deg);
-}
-
-/* -----------------------------------------------------------
-   TEXT STYLING
-   ----------------------------------------------------------- */
 .scene-text p {
   margin: 0;
-  font-size: 19px;
-  line-height: 30px; /* Matches the ruled lines */
-  color: #2c3e50;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 1px;
 }
 
-/* -----------------------------------------------------------
-   DECISION BUTTONS
-   ----------------------------------------------------------- */
+/* BUTTONS FOR FINAL SCENE */
 .btn-group {
-  margin-top: 25px;
+  margin-top: 30px;
   display: flex;
-  flex-direction: column; /* Stacked for better mobile tapping */
-  gap: 12px;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 button {
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-family: inherit;
+  padding: 12px 30px;
+  border-radius: 25px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
   font-weight: bold;
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 16px;
+  backdrop-filter: blur(5px);
 }
 
 #yes {
-  background-color: #ffb6c1; /* Soft Pink */
-  color: white;
-  border: none;
-  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+  background: rgba(255, 182, 193, 0.4);
+  border-color: #ffb6c1;
 }
 
 #no {
-  background-color: #f8f9fa;
-  color: #777;
+  font-size: 14px;
+  opacity: 0.8;
+  border-width: 1px;
 }
 
-button:active {
-  transform: scale(0.95);
+button:hover {
+  transform: scale(1.1);
+  background: white;
+  color: #333;
 }
 
-/* -----------------------------------------------------------
-   ANIMATIONS
-   ----------------------------------------------------------- */
-
-/* Paper sliding up into the sky */
-@keyframes paperSlideIn {
-  from { transform: translateY(100vh) rotate(15deg); opacity: 0; }
-  to { transform: translateY(0) rotate(0deg); opacity: 1; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Gentle floating movement */
-@keyframes floatPaper {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-12px) rotate(1deg); }
-}
-
-/* Floating Stickers/Blossoms */
-.sticker {
-  position: absolute;
-  pointer-events: none;
-  z-index: 5;
-  animation: fall 10s linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-}
-
-/* -----------------------------------------------------------
-   MOBILE OPTIMIZATION
-   ----------------------------------------------------------- */
+/* MOBILE FIX */
 @media (max-width: 480px) {
-  .scene-text {
-    width: 90%;
-    padding: 40px 20px 25px 45px;
-    font-size: 17px;
-    top: 10%;
-  }
-  
-  .scene-text::before {
-    font-size: 24px;
+  .scene-text p {
+    font-size: 22px;
   }
 }
