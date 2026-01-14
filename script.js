@@ -1,12 +1,13 @@
+// ------------------- SCENES DATA -------------------
 const scenes = [
   { text: "Nithya Sree ❤️", bg: "#120318" },
   { text: "Idhu oru normal website illa…", bg: "#1b0f2f" },
-  { text: "Idhu ennoda unmaiuna feelings 😌", bg: "#240b36" },
+  { text: "Idhu ennoda unmai feelings 😌", bg: "#240b36" },
   { text: "NCC Naval Wing ⚓", bg: "#001f3f" },
   { text: "Nee en junior-aa irundhaalum…", bg: "#0a2540" },
   { text: "Feelings-ku rank illa ❤️", bg: "#1a2a6c" },
-  { text: "First meeting memory…", bg: "#3a1c71" },
-  { text: "Un siripu en manasula nikkudhu 💕", bg: "#41295a" },
+  { text: "First meeting memory…", bg: "#3a1c71", image: "images/memory1.jpg" },
+  { text: "Un siripu en manasula nikkudhu 💕", bg: "#41295a", image: "images/memory2.jpg" },
   { text: "Naa dhairiyamaa propose panninen…", bg: "#1d2671" },
   { text: "Nee time venum nu sonna 🙂", bg: "#283048" },
   { text: "Adha naa respect panninen ❤️", bg: "#16222a" },
@@ -14,19 +15,21 @@ const scenes = [
   { text: "Adhu care ⏳", bg: "#6c5b7b" },
   { text: "No pressure…", bg: "#2c3e50" },
   { text: "No forcing…", bg: "#232526" },
-  { text: "Just unmaiuna feelings 💖", bg: "#414345" },
+  { text: "Just unmai feelings 💖", bg: "#414345" },
   { text: "Ippo indha moment…", bg: "#141e30" },
   { text: "Oru simple question mattum…", bg: "#243b55" },
   { text: "En manasula irundhu ❤️", bg: "#000428" },
   { text: "Un decision enna?", bg: "#004e92" },
 
-  // FINAL DECISION SCENE
+  // Decision Scene
   { decision: true, bg: "#000000" }
 ];
 
+// ------------------- GLOBAL VARIABLES -------------------
 let index = 0;
 const container = document.getElementById("scene-container");
 
+// ------------------- RENDER SCENE FUNCTION -------------------
 function renderScene() {
   container.innerHTML = "";
   container.style.background = scenes[index].bg;
@@ -43,22 +46,35 @@ function renderScene() {
 
     document.getElementById("yes").onclick = () => {
       window.location.href =
-        "https://ig.me/m/YOUR_BACKUP_INSTAGRAM";
+        "https://ig.me/m/YOUR_BACKUP_INSTAGRAM"; // Replace with your Insta backup account
     };
 
     document.getElementById("no").onclick = () => {
       document.getElementById("reply").innerText =
         "Paravalla 🙂 Naa wait panna ready ❤️";
     };
-
   } else {
-    const textDiv = document.createElement("div");
-    textDiv.className = "scene-text";
-    typeWriter(textDiv, scenes[index].text);
-    container.appendChild(textDiv);
+    const wrapper = document.createElement("div");
+    wrapper.className = "scene-text";
+
+    // Add image if exists
+    if (scenes[index].image) {
+      const photo = document.createElement("div");
+      photo.className = "photo";
+      photo.style.backgroundImage = `url(${scenes[index].image})`;
+      wrapper.appendChild(photo);
+    }
+
+    // Add typewriter text
+    const text = document.createElement("div");
+    typeWriter(text, scenes[index].text);
+    wrapper.appendChild(text);
+
+    container.appendChild(wrapper);
   }
 }
 
+// ------------------- TYPEWRITER EFFECT -------------------
 function typeWriter(el, text) {
   let i = 0;
   el.innerHTML = "";
@@ -69,7 +85,7 @@ function typeWriter(el, text) {
   }, 40);
 }
 
-// Tap / Click → next scene
+// ------------------- TAP NAVIGATION -------------------
 document.body.addEventListener("click", () => {
   if (index < scenes.length - 1) {
     index++;
@@ -77,4 +93,43 @@ document.body.addEventListener("click", () => {
   }
 });
 
+// ------------------- HEART PARTICLE ANIMATION -------------------
+const canvas = document.getElementById("effects");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let hearts = [];
+
+function createHeart() {
+  hearts.push({
+    x: Math.random() * canvas.width,
+    y: canvas.height + 20,
+    size: Math.random() * 10 + 10,
+    speed: Math.random() * 1 + 0.5
+  });
+}
+
+function drawHearts() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach((h, i) => {
+    ctx.fillStyle = "rgba(255,105,180,0.8)";
+    ctx.beginPath();
+    ctx.arc(h.x, h.y, h.size, 0, Math.PI * 2);
+    ctx.fill();
+    h.y -= h.speed;
+    if (h.y < -20) hearts.splice(i, 1);
+  });
+}
+
+setInterval(createHeart, 300);
+
+function animate() {
+  drawHearts();
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// ------------------- INITIAL SCENE -------------------
 renderScene();
